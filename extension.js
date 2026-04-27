@@ -1,14 +1,14 @@
-import { panel } from 'resource:///org/gnome/shell/ui/main.js';
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 import { LanIPAddressIndicator } from './LanIPAddressIndicator.js';
-import GObject from 'gi://GObject';
 
 
-export default class LanIpAddressExtension {
+export default class LanIpAddressExtension extends Extension {
     _indicator;
 
     enable() {
         this._indicator = new LanIPAddressIndicator();
-        panel.addToStatusArea('lan-ip-address-indicator', this._indicator);
+        Main.panel.addToStatusArea('lan-ip-address-indicator', this._indicator);
     }
 
     disable() {
@@ -17,9 +17,3 @@ export default class LanIpAddressExtension {
         this._indicator = undefined;
     }
 }
-
-GObject.registerClass(
-    {GTypeName: 'LanIPAddressIndicator'},
-    LanIPAddressIndicator
-);
-
